@@ -6,12 +6,9 @@ const router = express.Router();
 
 // Get all shifts
 router.get("/", (req, res) => {
-  async function getShift() {
-    const result = await Shift.find();
-    console.log(result);
-  }
-  getShift();
-  res.send("done");
+  (async function getShift() {
+    res.send(await Shift.find());
+  })();
 });
 
 // Get a shift
