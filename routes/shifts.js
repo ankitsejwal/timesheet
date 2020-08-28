@@ -1,24 +1,18 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const Shift = require("../models/shift");
 
 const router = express.Router();
 
 // Get all shifts
-router.get("/", (req, res) => {
-  (async function getShifts() {
-    res.send(await Shift.find());
-  })();
+router.get("/", async (req, res) => {
+  const result = await Shift.find();
+  res.send(result);
 });
 
 // Get a shift
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-
-  (async function getShift() {
-    const result = await Shift.find({ location: id });
-    res.send(result);
-  })();
+router.get("/:id", async (req, res) => {
+  const result = await Shift.find({ location: req.params.id });
+  res.send(result);
 });
 
 // Post a shift
