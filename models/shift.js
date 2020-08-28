@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 // set global option to remove warnings in terminal
 mongoose.set("useNewUrlParser", true);
@@ -16,15 +17,30 @@ const shiftSchema = new mongoose.Schema({
     default: Date.now,
   },
   employee: {
-    name: String,
-    email: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   time: {
-    start: Date,
-    end: Date,
+    start: { type: Date, required: true },
+    end: { type: Date, required: true },
     total: Number,
   },
-  location: String,
+  location: {
+    type: String,
+    minlength: 4,
+    maxlength: 100,
+    required: true,
+  },
 });
 
-module.exports = mongoose.model("Shift", shiftSchema);
+const Shift = mongoose.model("Shift", shiftSchema);
+
+const validate = (shift) => {
+  const schema = Joi.object({
+    time: Joi.date().required(),
+  });
+
+  return schema.validate(shift);
+};
+
+module.exports = { Shift, validate };
