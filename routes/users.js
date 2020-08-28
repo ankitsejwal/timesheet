@@ -3,13 +3,22 @@ const { User, validate } = require("../models/user");
 
 const router = express.Router();
 
-// get all user
+// Get all user
 router.get("/", async (req, res) => {
   const result = await User.find();
-  res.send(result);
+  res.status(200).send(result);
 });
 
-// create a new user
+// Get a user
+router.get("/:id", async (req, res) => {
+  const result = await User.findById(req.params.id);
+  if (result) {
+    res.status(200).send(result);
+  }
+  res.status(404).end();
+});
+
+// Create a new user
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) {
@@ -20,7 +29,6 @@ router.post("/", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) {
     res.status(200).send("User already exists");
-    return;
   }
 
   user = new User({
@@ -32,6 +40,31 @@ router.post("/", async (req, res) => {
 
   await user.save();
 
+  res.send(user);
+});
+
+// Update user
+router.put("/:id", async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.set({
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+      password: req.body.password,
+    });
+
+    const result = await user.save();
+
+    res.status(200).send(result);
+    return;
+  }
+  res.status(404).send("User doesn't exists");
+});
+
+// Delete a course
+router.delete("/:id", async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
   res.send(user);
 });
 
