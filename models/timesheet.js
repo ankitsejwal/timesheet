@@ -15,15 +15,18 @@ const shiftSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
+    required: true,
   },
   employee: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   time: {
     start: { type: Date, required: true },
     end: { type: Date, required: true },
     total: Number,
+    required: true,
   },
   location: {
     type: String,
