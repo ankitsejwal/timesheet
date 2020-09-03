@@ -36,7 +36,7 @@ const shiftSchema = new mongoose.Schema({
   },
 });
 
-const Shift = mongoose.model("Shift", shiftSchema);
+const Shift = mongoose.model("Timesheet", shiftSchema);
 
 const validate = (shift) => {
   const schema = Joi.object({

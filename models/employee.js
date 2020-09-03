@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("Employee", userSchema);
 
 const validate = (user) => {
   const schema = Joi.object({
