@@ -1,20 +1,40 @@
 const express = require("express");
-const home = require("./routes/home");
-const users = require("./routes/users");
+const mongoose = require("mongoose");
+const expressLayouts = require("express-ejs-layouts");
+
+// import routes
+const employees = require("./routes/employees");
 const shifts = require("./routes/shifts");
-const bodyParser = require("body-parser");
+const timesheets = require("./routes/shifts");
 
 const app = express();
 
+// set global option to remove warnings in terminal
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useUnifiedTopology", true);
+mongoose.set("useCreateIndex", true);
+
+mongoose
+  .connect("mongodb://localhost/timesheet")
+  .then(console.log("connected to db"))
+  .catch((err) => err);
+
 // middlewares
-app.set("view engine", "pug");
-app.set("views", "./views");
+app.set("view engine", "ejs");
+app.set("layouts", "layouts/layout");
+app.set(express.json());
+app.set(express.urlencoded({ limit: "10mb", extended: false }));
 
-app.use(bodyParser.json());
+app.use(expressLayouts);
+app.use(express.static("/public"));
 
-// routes middlewares
-app.use("/", home);
-app.use("/api/users", users);
-app.use("/api/shifts", shifts);
+// paths
+app.use("/employees", employees);
+app.use("/shifts", shifts);
+app.use("/timesheets", timesheets);
 
-app.listen(4004);
+app.get("/", (req, res) => {
+  res.send("home page");
+});
+
+app.listen(4000);
