@@ -1,11 +1,11 @@
 const express = require("express");
-const Shift = require("../models/shift");
+const { Shift, validate } = require("../models/timesheet");
 
 const router = express.Router();
 
 // Get all shifts
 router.get("/", async (req, res) => {
-  const result = await Shift.find();
+  const result = await Shift.find().populate("employee");
   res.send(result);
 });
 

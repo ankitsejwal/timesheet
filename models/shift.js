@@ -1,30 +1,39 @@
 const mongoose = require("mongoose");
-
-// set global option to remove warnings in terminal
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useUnifiedTopology", true);
-mongoose.set("useCreateIndex", true);
-
-mongoose
-  .connect("mongodb://localhost/timesheet")
-  .then("connected to db.")
-  .catch((err) => err);
+const Joi = require("joi");
 
 const shiftSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
+    required: true,
   },
   employee: {
-    name: String,
-    email: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   time: {
-    start: Date,
-    end: Date,
+    start: { type: Date, required: true },
+    end: { type: Date, required: true },
     total: Number,
+    required: true,
   },
-  location: String,
+  location: {
+    type: String,
+    minlength: 4,
+    maxlength: 100,
+    required: true,
+  },
 });
 
-module.exports = mongoose.model("Shift", shiftSchema);
+const Shift = mongoose.model("Shift", shiftSchema);
+
+const validate = (shift) => {
+  const schema = Joi.object({
+    time: Joi.date().required(),
+  });
+
+  return schema.validate(shift);
+};
+
+module.exports = { Shift, validate };
