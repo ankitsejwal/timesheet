@@ -1,5 +1,5 @@
 const express = require("express");
-const { Shift, validate } = require("../models/shift");
+const { Shift, validate } = require("../models/timesheet");
 
 const router = express.Router();
 
