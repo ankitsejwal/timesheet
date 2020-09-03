@@ -21,7 +21,7 @@ mongoose
 
 // middlewares
 app.set("view engine", "ejs");
-app.set("layouts", "layouts/layout");
+app.set("layout", "layouts/layout");
 app.set(express.json());
 app.set(express.urlencoded({ limit: "10mb", extended: false }));
 

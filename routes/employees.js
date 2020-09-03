@@ -3,6 +3,11 @@ const { User, validate } = require("../models/employee");
 
 const router = express.Router();
 
+// Create new employee
+router.get("/new", (req, res) => {
+  res.render("employees/new");
+});
+
 // Get all user
 router.get("/", async (req, res) => {
   const result = await User.find();
