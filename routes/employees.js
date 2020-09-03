@@ -1,5 +1,5 @@
 const express = require("express");
-const { User, validate } = require("../models/employee");
+const { Employee, validate } = require("../models/employee");
 
 const router = express.Router();
 
@@ -8,69 +8,76 @@ router.get("/new", (req, res) => {
   res.render("employees/new");
 });
 
-// Get all user
+// Get all employees
 router.get("/", async (req, res) => {
-  const result = await User.find();
-  res.status(200).send(result);
+  const query = req.query.name;
+
+  let searchOptions = {};
+
+  if (query !== null && query !== "") {
+    searchOptions = {
+      name: new RegExp(query, "i"),
+    };
+  }
+
+  const employees = await Employee.find(searchOptions);
+  res.render("employees/employees", {
+    employees: employees,
+    searchOptions: req.query,
+  });
 });
 
-// Get a user
+// Get an employee
 router.get("/:id", async (req, res) => {
-  const result = await User.findById(req.params.id);
+  const result = await Employee.findById(req.params.id);
   if (result) {
     res.status(200).send(result);
   }
   res.status(404).end();
 });
 
-// Create a new user
+// Create a new employee
 router.post("/", async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) {
-    res.status(200).send(error.details[0].message);
-    return;
+  let employee = await Employee.findOne({ email: req.body.email });
+  if (employee) {
+    res.status(200).send("Employee already exists");
   }
 
-  let user = await User.findOne({ email: req.body.email });
-  if (user) {
-    res.status(200).send("User already exists");
-  }
-
-  user = new User({
+  employee = new Employee({
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
-    password: req.body.password,
+    password: req.body.phone,
   });
 
-  await user.save();
+  await employee.save();
 
-  res.send(user);
+  res.render("employees/new");
 });
 
-// Update user
+// Update employee
 router.put("/:id", async (req, res) => {
-  const user = await User.findById(req.params.id);
-  if (user) {
-    user.set({
+  const employee = await Employee.findById(req.params.id);
+  if (employee) {
+    employee.set({
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
       password: req.body.password,
     });
 
-    const result = await user.save();
+    const result = await employee.save();
 
     res.status(200).send(result);
     return;
   }
-  res.status(404).send("User doesn't exists");
+  res.status(404).send("Employee doesn't exists");
 });
 
 // Delete a course
 router.delete("/:id", async (req, res) => {
-  const user = await User.findByIdAndDelete(req.params.id);
-  res.send(user);
+  const employee = await Employee.findByIdAndDelete(req.params.id);
+  res.send(employee);
 });
 
 module.exports = router;

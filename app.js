@@ -2,12 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ limit: "10mb", extended: false }));
+
 // import routes
 const employees = require("./routes/employees");
 const shifts = require("./routes/shifts");
 const timesheets = require("./routes/shifts");
-
-const app = express();
 
 // set global option to remove warnings in terminal
 mongoose.set("useNewUrlParser", true);
@@ -22,8 +24,6 @@ mongoose
 // middlewares
 app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
-app.set(express.json());
-app.set(express.urlencoded({ limit: "10mb", extended: false }));
 
 app.use(expressLayouts);
 app.use(express.static("/public"));

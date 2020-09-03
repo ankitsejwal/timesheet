@@ -1,0 +1,13 @@
+<h2>Employees:</h2>
+
+<form action="/employees" method="GET">
+  <label>Search</label>
+  <input type="text" name="name" value="<%- searchOptions.name %>" />
+  <button type="submit">Search</button>
+</form>
+
+<ul>
+  <% for (const employee of employees) { %>
+  <li><%- employee.name %></li>
+  <% } %>
+</ul>
