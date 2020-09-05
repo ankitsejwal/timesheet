@@ -2,9 +2,18 @@ const express = require("express");
 const router = express.Router();
 const Location = require("../models/location");
 
-// Get location
-router.get("/", (req, res) => {
-  res.render("locations/index");
+// Get all locations
+router.get("/", async (req, res) => {
+  let searchOptions = {};
+  if (req.query.location) {
+    searchOptions.location = new RegExp(req.query.location);
+  }
+
+  const locations = await Location.find(searchOptions);
+  res.render("locations/index", {
+    locations: locations,
+    searchOptions: req.query,
+  });
 });
 
 // Get create new location page

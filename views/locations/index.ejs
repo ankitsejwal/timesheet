@@ -1,1 +1,16 @@
-all locations
+<a href="/locations">All Locations</a>
+<a href="/locations/new">Add location</a>
+
+<h2>Saved locations</h2>
+
+<form action="/locations" method="get">
+  <label>Search</label>
+  <input type="text" name="location" value="<%= searchOptions.location %>" />
+  <button type="submit">Search</button>
+</form>
+
+<ul>
+  <% for (const location of locations) { %>
+  <li><%- location.location %></li>
+  <% } %>
+</ul>
