@@ -7,6 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({ limit: "10mb", extended: false }));
 
 // import routes
+const home = require("./routes/home");
 const employees = require("./routes/employees");
 const shifts = require("./routes/shifts");
 const timesheets = require("./routes/shifts");
@@ -29,12 +30,9 @@ app.use(expressLayouts);
 app.use(express.static("/public"));
 
 // paths
+app.use("/", home);
 app.use("/employees", employees);
 app.use("/shifts", shifts);
 app.use("/timesheets", timesheets);
-
-app.get("/", (req, res) => {
-  res.send("home page");
-});
 
 app.listen(4000);
