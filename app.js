@@ -7,10 +7,11 @@ app.use(express.json());
 app.use(express.urlencoded({ limit: "10mb", extended: false }));
 
 // import routes
-const home = require("./routes/home");
+const index = require("./routes");
 const employees = require("./routes/employees");
 const shifts = require("./routes/shifts");
 const timesheets = require("./routes/shifts");
+const locations = require("./routes/locations");
 
 // set global option to remove warnings in terminal
 mongoose.set("useNewUrlParser", true);
@@ -30,9 +31,10 @@ app.use(expressLayouts);
 app.use(express.static("/public"));
 
 // paths
-app.use("/", home);
+app.use("/", index);
 app.use("/employees", employees);
 app.use("/shifts", shifts);
 app.use("/timesheets", timesheets);
+app.use("/locations", locations);
 
 app.listen(4000);
