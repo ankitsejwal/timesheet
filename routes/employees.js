@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   }
 
   const employees = await Employee.find(searchOptions);
-  res.render("employees/employees", {
+  res.render("employees/index", {
     employees: employees,
     searchOptions: req.query,
   });
