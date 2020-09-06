@@ -6,8 +6,13 @@
   <button type="submit">Search</button>
 </form>
 
-<ul>
-  <% for (const employee of employees) { %>
-  <li><%- employee.name %></li>
-  <% } %>
-</ul>
+<% for (const employee of employees) { %>
+<form action="/employees" method="get">
+  <h4><%= employee.name %></h4>
+  <button type="submit" name="id" value="<%= employee.id %>" style="float: right">edit</button>
+  <p><%= employee.email %></p>
+  <p><%= employee.phone %></p>
+</div>
+</form>
+
+<% } %>
