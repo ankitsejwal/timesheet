@@ -3,14 +3,22 @@
 
 <h2>Saved locations</h2>
 
-<form action="/locations" method="get">
-  <label>Search</label>
-  <input type="text" name="location" value="<%= searchOptions.location %>" />
+<form action="/locations" method="GET">
+  <input
+    type="text"
+    name="location"
+    placeholder="Search"
+    value="<%= searchOptions.location %>"
+  />
   <button type="submit">Search</button>
 </form>
 
-<ul>
-  <% for (const location of locations) { %>
-  <li><%- location.location %></li>
-  <% } %>
-</ul>
+<form action="/locations/edit" method="GET">
+  <div>
+    <% for (const location of locations) { %>
+    <br />
+    <%= location.location %>
+    <button type="submit" name="id" value="<%= location.id %>">edit</button>
+    <% } %>
+  </div>
+</form>

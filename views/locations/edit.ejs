@@ -1,0 +1,15 @@
+<a href="/locations">See all locations</a>
+<br />
+<br />
+
+<form action="/locations/edit" method="POST">
+  <div>
+    <input
+      type="text"
+      name="location"
+      value="<%= location.location %>"
+      placeholder="Edit site"
+    />
+    <button type="submit">Edit location</button>
+  </div>
+</form>
