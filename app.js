@@ -37,4 +37,4 @@ app.use("/shifts", shifts);
 app.use("/timesheets", timesheets);
 app.use("/locations", locations);
 
-app.listen(4000);
+app.listen(process.env.PORT || 3000);
