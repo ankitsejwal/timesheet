@@ -6,12 +6,12 @@ const router = express.Router();
 
 // Create new employee
 router.get("/new", (req, res) => {
-  res.render("employees/new");
+  res.render("employees/new", { title: "New employee" });
 });
 
 // Get login page
 router.get("/login", (req, res) => {
-  res.render("employees/login");
+  res.render("employees/login", { title: "Login" });
 });
 
 // Get all employees
@@ -28,6 +28,7 @@ router.get("/", async (req, res) => {
 
   const employees = await Employee.find(searchOptions);
   res.render("employees/index", {
+    title: "All employees",
     employees: employees,
     searchOptions: req.query,
   });
@@ -65,7 +66,7 @@ router.post("/", async (req, res) => {
     });
 
     await employee.save();
-    res.render("employees/new");
+    res.redirect("/new");
   } catch {
     res.status(200).send("something went wrong");
   }
