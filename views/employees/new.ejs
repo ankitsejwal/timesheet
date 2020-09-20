@@ -1,15 +1,53 @@
-<h3>Create a new employee</h2>
-
-<form action="/employees" method="POST">
-    <label>Name </label>
-    <input type="text" name="name">
-    <br>
-    <label>Email </label>
-    <input type="text" name="email">
-    <br>
-    <label>Phone </label>
-    <input type="text" name="phone">
-    <br>
-    <br>
-    <button type="submit">Create</button>
-</form>
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="card">
+      <article class="card-body">
+        <h4 class="card-title mb-4 mt-1">Add new employee</h4>
+        <form action="/employees" method="POST">
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              class="form-control"
+              placeholder="Name"
+              type="text"
+              name="name"
+            />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              class="form-control"
+              placeholder="Email address"
+              type="email"
+              name="email"
+            />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input
+              class="form-control"
+              placeholder="Phone number"
+              type="text"
+              name="phone"
+            />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              class="form-control"
+              placeholder="Password = Phone number"
+              type="text"
+              name="phone"
+            />
+            <p class="text-success text-center mt-2">
+              Phone no will be the password
+            </p>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">
+            Create
+          </button>
+        </form>
+      </article>
+    </div>
+  </aside>
+</div>

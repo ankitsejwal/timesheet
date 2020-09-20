@@ -9,6 +9,11 @@ router.get("/new", (req, res) => {
   res.render("employees/new");
 });
 
+// Get login page
+router.get("/login", (req, res) => {
+  res.render("employees/login");
+});
+
 // Get all employees
 router.get("/", async (req, res) => {
   const query = req.query.name;
@@ -85,7 +90,7 @@ router.put("/:id", async (req, res) => {
   res.status(404).send("Employee doesn't exists");
 });
 
-// Delete a course
+// Delete an employee
 router.delete("/:id", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
   res.send(employee);

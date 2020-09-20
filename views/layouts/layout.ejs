@@ -3,27 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <title>Title</title>
     <style>
       body {
         background: #222;
-        color: #fff;
-        padding: 100px;
-      }
-      a {
-        color: #ccc;
-        padding: 10px;
-      }
-      h4 {
-        color: rgb(240, 147, 147);
       }
     </style>
   </head>
   <body>
-    <%- include('../partials/header') %>
-    <br />
-    <%- body %>
-    <br />
-    <%- include('../partials/footer') %>
+    <div class="container">
+      <%- include('../partials/header') %>
+      <br />
+      <%- body %>
+      <br />
+      <%- include('../partials/footer') %>
+    </div>
   </body>
 </html>
