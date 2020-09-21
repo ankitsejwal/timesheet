@@ -1,15 +1,24 @@
-<a href="/locations">See all locations</a>
-<br />
-<br />
-
-<form action="/locations/edit" method="POST">
-  <div>
-    <input
-      type="text"
-      name="location"
-      value="<%= location.location %>"
-      placeholder="Edit site"
-    />
-    <button type="submit">Edit location</button>
-  </div>
-</form>
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="mb-3 block">
+      <a href="/locations">See all locations</a>
+    </div>
+    <form action="/locations/edit" method="POST">
+      <div class="input-group">
+        <input
+          class="form-control"
+          type="text"
+          name="location"
+          value="<%= location.location %>"
+          placeholder="Edit site"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" type="submit">
+            Edit location
+          </button>
+        </div>
+        <input type="hidden" name="id" id="" value="<%= id %>" />
+      </div>
+    </form>
+  </aside>
+</div>

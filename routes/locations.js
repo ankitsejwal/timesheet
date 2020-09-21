@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Location = require("../models/location");
-const { findOneAndUpdate } = require("../models/location");
 
 // Get all locations
 router.get("/", async (req, res) => {
@@ -30,6 +29,7 @@ router.get("/edit", async (req, res) => {
     res.render("locations/edit", {
       title: "edit location",
       location: location,
+      id: req.query.id,
     });
   } catch {
     res.redirect("/locations");
@@ -39,16 +39,14 @@ router.get("/edit", async (req, res) => {
 // Edit locations
 router.post("/edit", async (req, res) => {
   try {
-    const id = {
-      id: req.body.id,
-    };
-    const newLocation = req.body.location;
-    console.log(req.query.id);
-    console.log(newLocation);
-
-    await findOneAndUpdate(id, newLocation);
-  } catch {
-    console.log("error saving edits");
+    const id = req.body.id;
+    const location = await Location.findByIdAndUpdate(id, {
+      $set: { location: req.body.location },
+    });
+    res.redirect("/locations");
+  } catch (err) {
+    console.error(err);
+    res.send("could not update");
   }
 });
 
