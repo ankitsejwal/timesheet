@@ -1,21 +1,41 @@
-<h2>Employees:</h2>
+<div class="row">
+  <aside class="col-sm-4">
+    <!-- searchbar -->
+    <form action="/employees" method="GET">
+      <div class="input-group mb-4">
+        <input
+          class="form-control"
+          type="text"
+          name="name"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Search employee"
+          value="<%- searchOptions.name %>"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
 
-<form action="/employees" method="GET">
-  <input 
-  type="text" 
-  name="name" 
-  placeholder="Search employee"
-  value="<%- searchOptions.name %>" />
-  <button type="submit">Search</button>
-</form>
+    <!-- results -->
+    <form action="/employees" method="get">
+      <% for (const employee of employees) { %>
+      <div class="card mb-4 p-3">
+        <p class="font-weight-bold"><%= employee.name %></p>
+        <p class="font-weight-normal"><%= employee.email %></p>
+        <p class="font-weight-light"><%= employee.phone %></p>
+        <button
+          class="btn btn-outline-danger col-sm-3 float-right"
+          type="submit"
+          name="id"
+          value="<%= employee.id %>"
+        >
+          edit
+        </button>
+      </div>
 
-<% for (const employee of employees) { %>
-<form action="/employees" method="get">
-  <h4><%= employee.name %></h4>
-  <button type="submit" name="id" value="<%= employee.id %>" style="float: right">edit</button>
-  <p><%= employee.email %></p>
-  <p><%= employee.phone %></p>
+      <% } %>
+    </form>
+  </aside>
 </div>
-</form>
-
-<% } %>
