@@ -1,24 +1,38 @@
-<a href="/locations">All Locations</a>
-<a href="/locations/new">Add location</a>
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="mb-3">
+      <a href="/locations/new">Add location</a>
+    </div>
 
-<h2>Saved locations</h2>
+    <form action="/locations" method="GET">
+      <div class="input-group mb-4">
+        <input
+          class="form-control"
+          type="text"
+          name="location"
+          placeholder="Search saved locations"
+          value="<%= searchOptions.location %>"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
 
-<form action="/locations" method="GET">
-  <input
-    type="text"
-    name="location"
-    placeholder="Search"
-    value="<%= searchOptions.location %>"
-  />
-  <button type="submit">Search</button>
-</form>
-
-<form action="/locations/edit" method="GET">
-  <div>
-    <% for (const location of locations) { %>
-    <br />
-    <%= location.location %>
-    <button type="submit" name="id" value="<%= location.id %>">edit</button>
-    <% } %>
-  </div>
-</form>
+    <form action="/locations/edit" method="GET">
+      <% for (const location of locations) { %>
+      <div class="card mb-4 p-3">
+        <p class="font-weight-bold"><%= location.location %></p>
+        <button
+          class="btn btn-outline-danger"
+          type="submit"
+          name="id"
+          value="<%= location.id %>"
+        >
+          edit
+        </button>
+      </div>
+      <% } %>
+    </form>
+  </aside>
+</div>

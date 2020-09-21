@@ -1,5 +1,8 @@
 <div class="row">
   <aside class="col-sm-4">
+    <div class="mb-3">
+      <a href="/employees/new">Add new employee</a>
+    </div>
     <!-- searchbar -->
     <form action="/employees" method="GET">
       <div class="input-group mb-4">
@@ -7,8 +10,6 @@
           class="form-control"
           type="text"
           name="name"
-          aria-label="Default"
-          aria-describedby="inputGroup-sizing-default"
           placeholder="Search employee"
           value="<%- searchOptions.name %>"
         />
