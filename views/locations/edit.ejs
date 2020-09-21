@@ -1,10 +1,7 @@
 <div class="row">
   <aside class="col-sm-4">
-    <div class="mb-3 block">
-      <a href="/locations">See all locations</a>
-    </div>
     <form action="/locations/edit" method="POST">
-      <div class="input-group">
+      <div class="input-group mb-4">
         <input
           class="form-control"
           type="text"
@@ -20,5 +17,19 @@
         <input type="hidden" name="id" id="" value="<%= id %>" />
       </div>
     </form>
+    <ul class="list-group mb-4">
+      <li class="list-group-item bg-light">
+        <a class="text-decoration-none font-weight-bold" href="/locations/new"
+          >Add new location</a
+        >
+      </li>
+      <li class="list-group-item bg-light">
+        <a
+          class="text-decoration-none font-weight-bold"
+          href="/locations/delete"
+          >Delete location</a
+        >
+      </li>
+    </ul>
   </aside>
 </div>
