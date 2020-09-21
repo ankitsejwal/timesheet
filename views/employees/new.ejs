@@ -1,45 +1,71 @@
 <div class="row">
   <aside class="col-sm-4">
-    <div class="card">
+    <div class="card mb-4">
       <article class="card-body">
-        <h4 class="card-title mb-4 mt-1">Add new employee</h4>
+        <h4 class="card-title text-muted mb-4 mt-1">
+          Add employee <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </h4>
         <form action="/employees/new" method="POST">
           <div class="form-group">
-            <label>Name</label>
-            <input
-              class="form-control border-primary"
-              placeholder="Name"
-              type="text"
-              name="name"
-            />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-user"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Name"
+                type="text"
+                name="name"
+              />
+            </div>
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input
-              class="form-control border-primary"
-              placeholder="Email address"
-              type="email"
-              name="email"
-            />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-at"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Email address"
+                type="email"
+                name="email"
+              />
+            </div>
           </div>
           <div class="form-group">
-            <label>Phone</label>
-            <input
-              class="form-control border-primary"
-              placeholder="Phone number"
-              type="text"
-              name="phone"
-            />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-phone"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Phone number"
+                type="text"
+                name="phone"
+              />
+            </div>
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input
-              class="form-control border-primary"
-              placeholder="Password = Phone number"
-              type="text"
-              name="password"
-            />
-            <p class="text-info mt-2">Password is the phone no.</p>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-unlock"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Password"
+                type="text"
+                name="password"
+              />
+              <p class="text-info mt-2">Password is the phone no.</p>
+            </div>
           </div>
           <button class="btn btn-primary btn-block" type="submit">
             Create
@@ -47,5 +73,19 @@
         </form>
       </article>
     </div>
+    <ul class="list-group mb-4">
+      <li class="list-group-item bg-light">
+        <a class="text-decoration-none font-weight-bold" href="/employees"
+          >All employees</a
+        >
+      </li>
+      <li class="list-group-item bg-light">
+        <a
+          class="text-decoration-none font-weight-bold"
+          href="/employees/delete"
+          >Delete employee</a
+        >
+      </li>
+    </ul>
   </aside>
 </div>
