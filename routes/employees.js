@@ -8,10 +8,6 @@ const router = express.Router();
 router.get("/new", (req, res) => {
   res.render("employees/new", {
     title: "New employee",
-    navlink: {
-      text: "See all employees",
-      url: "/employees",
-    },
   });
 });
 
@@ -35,10 +31,6 @@ router.get("/", async (req, res) => {
   const employees = await Employee.find(searchOptions);
   res.render("employees/index", {
     title: "All employees",
-    navlink: {
-      text: "Add new employee",
-      url: "/employees/new",
-    },
     employees: employees,
     searchOptions: req.query,
   });
