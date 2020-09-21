@@ -1,4 +1,5 @@
 const express = require("express");
+const { findByIdAndDelete } = require("../models/location");
 const router = express.Router();
 const Location = require("../models/location");
 
@@ -36,11 +37,20 @@ router.get("/edit", async (req, res) => {
   }
 });
 
+// Add a location
+router.post("/", async (req, res) => {
+  const location = new Location({
+    location: req.body.location,
+  });
+  await location.save();
+  res.redirect("/locations");
+});
+
 // Edit locations
 router.post("/edit", async (req, res) => {
   try {
     const id = req.body.id;
-    const location = await Location.findByIdAndUpdate(id, {
+    await Location.findByIdAndUpdate(id, {
       $set: { location: req.body.location },
     });
     res.redirect("/locations");
@@ -50,13 +60,29 @@ router.post("/edit", async (req, res) => {
   }
 });
 
-// Post a location
-router.post("/", async (req, res) => {
-  const location = new Location({
-    location: req.body.location,
+// delete location
+router
+  .get("/delete", async (req, res) => {
+    let searchOptions = {};
+    if (req.query.location) {
+      searchOptions.location = new RegExp(req.query.location);
+    }
+
+    const locations = await Location.find(searchOptions);
+    res.render("locations/delete", {
+      title: "All locations",
+      locations: locations,
+      searchOptions: req.query,
+    });
+  })
+  .post("/delete", async (req, res) => {
+    try {
+      await Location.findByIdAndDelete(req.body.id);
+      res.redirect("/locations/delete");
+    } catch (err) {
+      console.error(err);
+      res.send("could not delete");
+    }
   });
-  await location.save();
-  res.redirect("/locations");
-});
 
 module.exports = router;
