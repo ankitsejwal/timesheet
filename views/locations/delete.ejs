@@ -1,6 +1,6 @@
 <div class="row">
   <aside class="col-sm-4">
-    <form action="/locations" method="GET">
+    <form action="/locations/delete" method="GET">
       <div class="input-group mb-4">
         <input
           class="form-control"
@@ -31,7 +31,7 @@
   </aside>
   <aside class="col-sm-2"></aside>
   <aside class="col-sm-6">
-    <form action="/locations/edit" method="GET">
+    <form action="/locations/delete" method="POST">
       <% for (const location of locations) { %>
       <div class="card text-primary border-primary bg-light mb-2 p-3">
         <div class="row">
@@ -39,9 +39,6 @@
             <p class="card-title text-capitalize font-weight-bold">
               <%= location.location %>
             </p>
-            <!-- <p class="card-subtitle font-weight-light text-muted">
-              Edit location
-            </p> -->
           </div>
           <div class="col-3">
             <button
@@ -50,12 +47,11 @@
               name="id"
               value="<%= location.id %>"
             >
-              edit
+              delete
             </button>
           </div>
         </div>
       </div>
-
       <% } %>
     </form>
   </aside>

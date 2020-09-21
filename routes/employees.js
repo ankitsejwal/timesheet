@@ -6,7 +6,9 @@ const router = express.Router();
 
 // Create new employee
 router.get("/new", (req, res) => {
-  res.render("employees/new", { title: "New employee" });
+  res.render("employees/new", {
+    title: "New employee",
+  });
 });
 
 // Get login page
@@ -44,7 +46,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create a new employee
-router.post("/", async (req, res) => {
+router.post("/new", async (req, res) => {
   try {
     let employee = await Employee.findOne({ email: req.body.email });
 
@@ -58,16 +60,20 @@ router.post("/", async (req, res) => {
     console.log(salt);
     console.log(hashedPassword);
 
-    employee = new Employee({
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(req.body.phone);
+
+    await Employee.create({
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
       password: hashedPassword,
     });
 
-    await employee.save();
-    res.redirect("/new");
-  } catch {
+    res.redirect("/employees/new");
+  } catch (err) {
+    console.error(err);
     res.status(200).send("something went wrong");
   }
 });
@@ -95,6 +101,19 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const employee = await Employee.findByIdAndDelete(req.params.id);
   res.send(employee);
+});
+
+// Login
+router.post("/login", async (req, res) => {
+  try {
+    const employee = await Employee.find(req.body.email);
+    if (employee == null) return res.status(404).send("Employee not found");
+    if (await bcrypt.compare(employee.password === req.body.password)) {
+      res.send("password matched");
+    }
+  } catch {
+    res.send("invalid credentials");
+  }
 });
 
 module.exports = router;
