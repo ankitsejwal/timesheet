@@ -1,0 +1,84 @@
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="card mb-4">
+      <article class="card-body">
+        <h4 class="card-title text-muted mb-4 mt-1">
+          Edit employee <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </h4>
+        <form action="/employees/edit" method="POST">
+          <div class="form-group">
+            <input type="hidden" name="id" value="<%= employee.id %>" />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-user"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Name"
+                type="text"
+                name="name"
+                value="<%= employee.name %>"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-at"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Email address"
+                type="email"
+                name="email"
+                value="<%= employee.email %>"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-phone"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                placeholder="Phone number"
+                type="text"
+                name="phone"
+                value="<%= employee.phone %>"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <p class="text-info mt-2">Password is the phone no.</p>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">
+            Create
+          </button>
+        </form>
+      </article>
+    </div>
+    <ul class="list-group mb-4">
+      <li class="list-group-item bg-light">
+        <a class="text-decoration-none font-weight-bold" href="/employees"
+          >All employees</a
+        >
+      </li>
+      <li class="list-group-item bg-light">
+        <a
+          class="text-decoration-none font-weight-bold"
+          href="/employees/delete"
+          >Delete employee</a
+        >
+      </li>
+    </ul>
+  </aside>
+</div>

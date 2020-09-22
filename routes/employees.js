@@ -54,6 +54,28 @@ router
     }
   });
 
+// Edit an employee
+router
+  .get("/edit", async (req, res) => {
+    const employee = await Employee.findById(req.query.id);
+
+    res.render("employees/edit", {
+      title: "Edit employee details",
+      employee: employee,
+    });
+  })
+  .post("/edit", async (req, res) => {
+    const employee = await Employee.findByIdAndUpdate(req.body.id, {
+      $set: {
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: req.body.phone,
+      },
+    });
+    res.redirect("/employees");
+  });
+
 // Delete an employee
 router
   .get("/delete", async (req, res) => {
