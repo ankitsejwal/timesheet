@@ -49,8 +49,7 @@ router.post("/", async (req, res) => {
 // Edit locations
 router.post("/edit", async (req, res) => {
   try {
-    const id = req.body.id;
-    await Location.findByIdAndUpdate(id, {
+    await Location.findByIdAndUpdate(req.body.id, {
       $set: { location: req.body.location },
     });
     res.redirect("/locations");

@@ -3,10 +3,11 @@
     <div class="card mb-4">
       <article class="card-body">
         <h4 class="card-title text-muted mb-4 mt-1">
-          Add employee <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          Edit employee <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </h4>
-        <form action="/employees/new" method="POST">
+        <form action="/employees/edit" method="POST">
           <div class="form-group">
+            <input type="hidden" name="id" value="<%= employee.id %>" />
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">
@@ -18,6 +19,7 @@
                 placeholder="Name"
                 type="text"
                 name="name"
+                value="<%= employee.name %>"
               />
             </div>
           </div>
@@ -33,6 +35,7 @@
                 placeholder="Email address"
                 type="email"
                 name="email"
+                value="<%= employee.email %>"
               />
             </div>
           </div>
@@ -48,22 +51,12 @@
                 placeholder="Phone number"
                 type="text"
                 name="phone"
+                value="<%= employee.phone %>"
               />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-unlock"></i>
-                </span>
-              </div>
-              <input
-                class="form-control"
-                placeholder="Password"
-                type="text"
-                name="password"
-              />
               <p class="text-info mt-2">Password is the phone no.</p>
             </div>
           </div>

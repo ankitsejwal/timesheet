@@ -8,7 +8,7 @@
           type="text"
           name="name"
           placeholder="Search employee"
-          value="<%- searchOptions.name %>"
+          value="<%= searchOptions.name %>"
         />
         <div class="input-group-append">
           <button class="btn btn-outline-primary" type="submit">Search</button>
@@ -34,7 +34,7 @@
   <aside class="col-sm-3"></aside>
   <aside class="col-sm-5">
     <!-- results -->
-    <form action="/employees" method="get">
+    <form action="/employees/edit" method="get">
       <% for (const employee of employees) { %>
 
       <div class="card text-primary border-primary bg-light mb-2 p-3">
@@ -55,7 +55,7 @@
               name="id"
               value="<%= employee.id %>"
             >
-              edit
+              Edit
             </button>
           </div>
         </div>

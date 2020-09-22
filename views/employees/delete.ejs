@@ -1,57 +1,64 @@
 <div class="row">
   <aside class="col-sm-4">
-    <form action="/locations/delete" method="GET">
+    <!-- searchbar -->
+    <form action="/employees/delete" method="GET">
       <div class="input-group mb-4">
         <input
           class="form-control"
           type="text"
-          name="location"
-          placeholder="Search saved locations"
-          value="<%= searchOptions.location %>"
+          name="name"
+          placeholder="Search employee"
+          value="<%= searchOptions.name %>"
         />
         <div class="input-group-append">
           <button class="btn btn-outline-primary" type="submit">Search</button>
         </div>
       </div>
     </form>
+
     <ul class="list-group mb-4">
       <li class="list-group-item bg-light">
-        <a class="text-decoration-none font-weight-bold" href="/locations/new"
-          >Add new location</a
+        <a class="text-decoration-none font-weight-bold" href="/employees"
+          >All employees</a
         >
       </li>
       <li class="list-group-item bg-light">
-        <a
-          class="text-decoration-none font-weight-bold"
-          href="/locations/delete"
-          >Delete location</a
+        <a class="text-decoration-none font-weight-bold" href="/employees/new"
+          >Add new employee</a
         >
       </li>
     </ul>
   </aside>
-  <aside class="col-sm-2"></aside>
-  <aside class="col-sm-6">
-    <form action="/locations/delete" method="POST">
-      <% for (const location of locations) { %>
+  <aside class="col-sm-3"></aside>
+  <aside class="col-sm-5">
+    <!-- results -->
+    <form action="/employees/delete" method="POST">
+      <% for (const employee of employees) { %>
+
       <div class="card text-primary border-primary bg-light mb-2 p-3">
         <div class="row">
           <div class="col-9">
             <p class="card-title text-capitalize font-weight-bold">
-              <%= location.location %>
+              <%= employee.name %>
             </p>
+            <p class="card-subtitle font-weight-normal">
+              <%= employee.email %>
+            </p>
+            <p class="card-text font-weight-light"><%= employee.phone %></p>
           </div>
           <div class="col-3">
             <button
               class="btn btn-outline-danger float-right"
               type="submit"
               name="id"
-              value="<%= location.id %>"
+              value="<%= employee.id %>"
             >
               Delete
             </button>
           </div>
         </div>
       </div>
+
       <% } %>
     </form>
   </aside>
