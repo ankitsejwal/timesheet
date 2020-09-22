@@ -1,9 +1,12 @@
 <div class="row">
   <aside class="col-sm-4">
-    <div class="card mb-4">
-      <article class="card-body">
+    <div class="card mb-3">
+      <article class="card-body shadow-sm">
         <h4 class="card-title text-muted mb-4 mt-1">
-          Add employee <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          Add employee &nbsp;<i
+            class="fa fa-plus-circle text-primary"
+            aria-hidden="true"
+          ></i>
         </h4>
         <form action="/employees/new" method="POST">
           <div class="form-group">
@@ -64,14 +67,16 @@
                 type="text"
                 name="password"
               />
-              <p class="text-info mt-2">Password is the phone no.</p>
             </div>
           </div>
-          <button class="btn btn-primary btn-block" type="submit">
+          <button class="btn btn-primary btn-md btn-block" type="submit">
             Create
           </button>
         </form>
       </article>
+    </div>
+    <div class="alert alert-primary text-center" role="alert">
+      Password will be the phone no.
     </div>
     <ul class="list-group mb-4">
       <li class="list-group-item bg-light">
