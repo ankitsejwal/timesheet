@@ -65,15 +65,23 @@ router
     });
   })
   .post("/edit", async (req, res) => {
-    const employee = await Employee.findByIdAndUpdate(req.body.id, {
-      $set: {
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: req.body.phone,
-      },
-    });
-    res.redirect("/employees");
+    try {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(req.body.phone, salt);
+
+      await Employee.findByIdAndUpdate(req.body.id, {
+        $set: {
+          name: req.body.name,
+          email: req.body.email,
+          phone: req.body.phone,
+          password: hashedPassword,
+        },
+      });
+      res.redirect("/employees");
+    } catch (err) {
+      console.log(err);
+      res.redirect("/employees");
+    }
   });
 
 // Delete an employee
