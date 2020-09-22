@@ -18,15 +18,13 @@
 
     <ul class="list-group mb-4">
       <li class="list-group-item bg-light">
-        <a class="text-decoration-none font-weight-bold" href="/employees/new"
-          >Add new employee</a
+        <a class="text-decoration-none font-weight-bold" href="/employees"
+          >Search all employees</a
         >
       </li>
       <li class="list-group-item bg-light">
-        <a
-          class="text-decoration-none font-weight-bold"
-          href="/employees/delete"
-          >Delete employee</a
+        <a class="text-decoration-none font-weight-bold" href="/employees/new"
+          >Add new employee</a
         >
       </li>
     </ul>
@@ -34,7 +32,7 @@
   <aside class="col-sm-3"></aside>
   <aside class="col-sm-5">
     <!-- results -->
-    <form action="/employees" method="get">
+    <form action="/employees/delete" method="POST">
       <% for (const employee of employees) { %>
 
       <div class="card text-primary border-primary bg-light mb-2 p-3">
@@ -55,7 +53,7 @@
               name="id"
               value="<%= employee.id %>"
             >
-              Edit
+              Delete
             </button>
           </div>
         </div>
