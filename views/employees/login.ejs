@@ -10,7 +10,7 @@
               class="form-control"
               type="email"
               placeholder="email"
-              name=""
+              name="email"
               id=""
             />
           </div>
@@ -20,13 +20,16 @@
               class="form-control"
               type="password"
               placeholder="******"
-              name=""
+              name="password"
               id=""
             />
           </div>
           <button class="btn btn-primary btn-block" type="submit">Login</button>
         </form>
       </article>
+    </div>
+    <div class="<%= error.type %> alert-danger text-center mt-3" role="alert">
+      <%= error.message %>
     </div>
   </aside>
 </div>

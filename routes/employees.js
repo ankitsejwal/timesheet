@@ -116,17 +116,46 @@ router
 // Get login page
 router
   .get("/login", (req, res) => {
-    res.render("employees/login", { title: "Login" });
+    res.render("employees/login", {
+      title: "Login",
+      error: {
+        type: "",
+        message: "",
+      },
+    });
   })
   .post("/login", async (req, res) => {
     try {
-      const employee = await Employee.find(req.body.email);
-      if (employee == null) return res.status(404).send("Employee not found");
-      if (await bcrypt.compare(employee.password === req.body.password)) {
-        res.send("password matched");
+      const employee = await Employee.findOne({ email: req.body.email });
+      if (employee == null)
+        return res.render("employees/login", {
+          title: "Login",
+          error: {
+            type: "alert",
+            message: "Email not found.",
+          },
+        });
+      if (await bcrypt.compare(req.body.password, employee.password)) {
+        console.log("successful login");
+        res.render("employees/login", {
+          title: "Login",
+          error: {
+            type: "alert",
+            message: "login successful",
+          },
+        });
       }
-    } catch {
-      res.send("invalid credentials");
+      // invalid credentails
+      res.render("employees/login", {
+        title: "Login",
+        error: {
+          type: "alert",
+          message: "Invalid credentials",
+        },
+      });
+    } catch (err) {
+      console.log("error");
+      console.error(err);
     }
   });
 
