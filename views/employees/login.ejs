@@ -2,27 +2,41 @@
   <aside class="col-sm-4">
     <div class="card">
       <article class="card-body">
-        <h4 class="card-title mb-4 mt-1">Employee Login</h4>
+        <h4 class="card-title mb-4 mt-1 text-muted">
+          Employee Login &nbsp; <i class="fa fa-sign-in text-primary"></i>
+        </h4>
         <form action="/employees/login" method="post">
           <div class="form-group">
-            <label>Email</label>
-            <input
-              class="form-control"
-              type="email"
-              placeholder="email"
-              name="email"
-              id=""
-            />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-at"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                id=""
+              />
+            </div>
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input
-              class="form-control"
-              type="password"
-              placeholder="******"
-              name="password"
-              id=""
-            />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+              <input
+                class="form-control"
+                type="password"
+                placeholder="Enter password"
+                name="password"
+                id=""
+              />
+            </div>
           </div>
           <button class="btn btn-primary btn-block" type="submit">Login</button>
         </form>
