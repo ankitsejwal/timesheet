@@ -116,47 +116,53 @@ router
 // Get login page
 router
   .get("/login", (req, res) => {
-    res.render("employees/login", {
-      title: "Login",
-      error: {
-        type: "",
-        message: "",
-      },
-    });
+    renderPage(res, "employees/login", "Login", "", "");
   })
   .post("/login", async (req, res) => {
     try {
       const employee = await Employee.findOne({ email: req.body.email });
-      if (employee == null)
-        return res.render("employees/login", {
-          title: "Login",
-          error: {
-            type: "alert",
-            message: "Email not found.",
-          },
-        });
+      if (employee == null) {
+        renderPage(
+          res,
+          "employees/login",
+          "Login",
+          "alert-danger",
+          "Invalid credentials"
+        );
+      }
+      // if credentials match
       if (await bcrypt.compare(req.body.password, employee.password)) {
         console.log("successful login");
-        res.render("employees/login", {
-          title: "Login",
-          error: {
-            type: "alert",
-            message: "login successful",
-          },
-        });
+        renderPage(
+          res,
+          "employees/login",
+          "Login",
+          "alert-success",
+          "Login successful"
+        );
       }
       // invalid credentails
-      res.render("employees/login", {
-        title: "Login",
-        error: {
-          type: "alert",
-          message: "Invalid credentials",
-        },
-      });
+      renderPage(
+        res,
+        "employees/login",
+        "Login",
+        "alert-danger",
+        "Invalid credentials"
+      );
     } catch (err) {
       console.log("error");
       console.error(err);
     }
   });
+
+function renderPage(res, path, title, type, text) {
+  res.render(path, {
+    title: title,
+    message: {
+      type: type,
+      text: text,
+    },
+  });
+}
 
 module.exports = router;
