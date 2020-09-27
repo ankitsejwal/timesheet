@@ -28,7 +28,7 @@ const employeeSchema = new mongoose.Schema({
     maxlength: 1024,
     required: true,
   },
-  admin: {
+  isAdmin: {
     type: Boolean,
     default: false,
     required: true,
