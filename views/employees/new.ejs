@@ -48,6 +48,8 @@
               </div>
               <input
                 class="form-control"
+                id="phone"
+                onkeyup="updatePasswordText()"
                 placeholder="Phone number"
                 type="text"
                 name="phone"
@@ -61,12 +63,7 @@
                   <i class="fa fa-unlock"></i>
                 </span>
               </div>
-              <input
-                class="form-control"
-                placeholder="Password"
-                type="text"
-                name="password"
-              />
+              <p class="form-control" id="password">Password</p>
             </div>
           </div>
           <button class="btn btn-primary btn-md btn-block" type="submit">
@@ -94,3 +91,17 @@
     </ul>
   </aside>
 </div>
+<script>
+  function updatePasswordText() {
+    // update password text to be phone number
+    const phone = document.getElementById("phone").value;
+    const password = document.getElementById("password");
+    password.innerHTML = phone;
+
+    // Reprint Password text as a placeholder
+    if (password.textContent === "") {
+      console.log("empty");
+      password.innerHTML = "Password";
+    }
+  }
+</script>
