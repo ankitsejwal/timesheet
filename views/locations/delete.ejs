@@ -30,17 +30,17 @@
     </ul>
   </aside>
   <aside class="col-sm-2"></aside>
-  <aside class="col-sm-6">
+  <aside class="col-sm-8">
     <form action="/locations/delete" method="POST">
       <% for (const location of locations) { %>
       <div class="card text-primary border-primary bg-light mb-2 p-3">
         <div class="row">
-          <div class="col-9">
+          <div class="col-6">
             <p class="card-title text-capitalize font-weight-bold mt-2 mb-n2">
               <%= location.location %>
             </p>
           </div>
-          <div class="col-3">
+          <div class="col-4">
             <button
               class="btn btn-outline-danger float-right"
               type="submit"
