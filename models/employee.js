@@ -25,22 +25,28 @@ const employeeSchema = new mongoose.Schema({
   password: {
     type: String,
     minlength: 5,
-    maxlength: 256,
+    maxlength: 1024,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
     required: true,
   },
 });
 
 const Employee = mongoose.model("Employee", employeeSchema);
 
-const validate = (employee) => {
+function validate(employee) {
   const schema = Joi.object({
     name: Joi.string().trim().min(3).max(50).required(),
     email: Joi.string().trim().email().min(5).max(100).required(),
     phone: Joi.string().trim().min(9).max(10).required(),
     password: Joi.string().trim().min(5).max(256).required(),
+    admin: Joi.boolean().required(),
   });
 
   return schema.validate(employee);
-};
+}
 
 module.exports = { Employee, validate };
